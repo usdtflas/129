@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VIP Sellers Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <style>
+    body {
+      background: linear-gradient(to right, #1f1c2c, #928dab);
+      font-family: 'Inter', sans-serif;
+    }
+    .blurred-box {
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      background-color: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 1rem;
+    }
+  </style>
+</head>
+<body class="flex items-center justify-center min-h-screen px-4">
+
+  <div class="text-center max-w-md w-full space-y-6">
+
+    <!-- Logo centered above title -->
+    <div class="flex justify-center">
+      <img src="logo2.png" alt="Logo" class="w-20 h-20 rounded-full shadow-lg mb-2">
+    </div>
+
+    <!-- Title -->
+    <h1 class="text-3xl font-bold text-white">VIP Sellers Dashboard</h1>
+
+    <!-- Blurred Locked Section -->
+    <div class="blurred-box p-10 text-white text-lg font-medium">
+      🔒 Locked Content
+    </div>
+
+    <!-- Unlock Button -->
+    <a href="unlock.html" class="inline-block bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-6 rounded-full transition duration-200">
+      Unlock
+    </a>
+
+    <!-- Small Note -->
+    <p class="text-sm text-white opacity-80 mt-4">
+      You can use our website to sell Flash USDT and get more than <span class="font-semibold text-green-300">23k buyers</span> every day.
+    </p>
+
+  </div>
+
+</body>
+</html>
